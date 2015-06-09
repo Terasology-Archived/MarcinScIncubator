@@ -1,0 +1,9 @@
+{
+    "id" : "MarcinScIncubator",
+    "version" : "0.1.0",
+    "author" : "",
+    "displayName" : "MarcinScIncubator",
+    "description" : "",
+    "dependencies" : [],
+    "isServerSideOnly" : false
+}
