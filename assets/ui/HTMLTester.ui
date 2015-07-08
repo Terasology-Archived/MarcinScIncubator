@@ -1,0 +1,50 @@
+{
+    "type": "HTMLTester",
+    "contents": {
+        "type": "relativeLayout",
+        "contents": [
+            {
+                "type": "columnLayout",
+                "columns": 1,
+                "verticalSpacing": 3,
+                "contents": [
+                    {
+                        "id": "browserScrollable",
+                        "type": "ScrollableArea",
+                        "horizontalScrollbar": true,
+                        "content": {
+                            "id": "browser",
+                            "type": "BrowserWidget"
+                        },
+                        "layoutInfo": {
+                            "position-left": {},
+                            "position-right": {},
+                            "position-bottom": {},
+                            "position-top": {
+                                "widget": "buttonBar",
+                                "target": "BOTTOM"
+                            }
+                        }
+                    },
+                    {
+                        "id" : "textArea",
+                        "type" : "UIText",
+                        "multiline": true,
+                        "canBeFocus": true
+                    },
+                    {
+                        "id" : "status",
+                        "type" : "UIText",
+                        "canBeFocus": false
+                    }
+                ],
+                "layoutInfo": {
+                    "width": 708,
+                    "height": 597,
+                    "position-horizontal-center": {},
+                    "position-vertical-center": {}
+                }
+            }
+        ]
+    }
+}
