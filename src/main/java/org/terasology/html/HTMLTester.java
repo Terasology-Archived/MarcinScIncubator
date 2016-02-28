@@ -15,7 +15,7 @@
  */
 package org.terasology.html;
 
-import org.terasology.asset.Assets;
+import org.terasology.utilities.Assets;
 import org.terasology.rendering.assets.font.Font;
 import org.terasology.rendering.nui.CoreScreenLayer;
 import org.terasology.rendering.nui.widgets.CursorUpdateEventListener;
