@@ -15,7 +15,6 @@
  */
 package org.terasology.html;
 
-import org.terasology.utilities.Assets;
 import org.terasology.rendering.assets.font.Font;
 import org.terasology.rendering.nui.CoreScreenLayer;
 import org.terasology.rendering.nui.widgets.CursorUpdateEventListener;
@@ -26,6 +25,7 @@ import org.terasology.rendering.nui.widgets.browser.data.html.HTMLParseException
 import org.terasology.rendering.nui.widgets.browser.data.html.HTMLParser;
 import org.terasology.rendering.nui.widgets.browser.data.html.basic.DefaultHTMLDocumentBuilderFactory;
 import org.terasology.rendering.nui.widgets.browser.ui.BrowserWidget;
+import org.terasology.utilities.Assets;
 
 public class HTMLTester extends CoreScreenLayer {
     private BrowserWidget browserWidget;
@@ -53,7 +53,7 @@ public class HTMLTester extends CoreScreenLayer {
     ));
 
     @Override
-    protected void initialise() {
+    public void initialise() {
         browserWidget = find("browser", BrowserWidget.class);
         textArea = find("textArea", UIText.class);
         status = find("status", UIText.class);
