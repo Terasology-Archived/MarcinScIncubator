@@ -35,16 +35,12 @@ public class HTMLTester extends CoreScreenLayer {
     private HTMLParser parser = new HTMLParser(new DefaultHTMLDocumentBuilderFactory(
             new HTMLFontResolver() {
                 @Override
-                public Font getFont(String name, boolean bold, boolean italic) {
+                public Font getFont(String name, boolean bold) {
                     if (name == null) {
                         return null;
                     }
-                    if (bold && italic) {
-                        return Assets.getFont(name + "-BoldItalic").get();
-                    } else if (bold) {
+                    if (bold) {
                         return Assets.getFont(name + "-Bold").get();
-                    } else if (italic) {
-                        return Assets.getFont(name + "-Italic").get();
                     } else {
                         return Assets.getFont(name + "-Regular").get();
                     }
