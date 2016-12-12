@@ -1,9 +1,9 @@
 {
     "id" : "MarcinScIncubator",
     "version" : "0.1.1-SNAPSHOT",
-    "author" : "",
+    "author" : "MarcinSc, Cervator, Josharias",
     "displayName" : "MarcinScIncubator",
-    "description" : "",
+    "description" : "A module for adding a generic incubator in Terasology",
     "dependencies" : [],
     "isServerSideOnly" : false
 }
