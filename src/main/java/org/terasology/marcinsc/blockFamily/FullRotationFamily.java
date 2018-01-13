@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 MovingBlocks
+ * Copyright 2018 MovingBlocks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,47 +20,49 @@ import org.terasology.math.Rotation;
 import org.terasology.math.Side;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.naming.Name;
-import org.terasology.world.BlockEntityRegistry;
-import org.terasology.world.WorldProvider;
 import org.terasology.world.block.Block;
+import org.terasology.world.block.BlockBuilderHelper;
 import org.terasology.world.block.BlockUri;
 import org.terasology.world.block.family.AbstractBlockFamily;
+import org.terasology.world.block.family.RegisterBlockFamily;
+import org.terasology.world.block.loader.BlockFamilyDefinition;
 
 import java.util.Map;
 
+@RegisterBlockFamily("fullRotation")
 public class FullRotationFamily extends AbstractBlockFamily implements RotationBlockFamily {
-    private Map<Rotation, Block> blocks;
-
+    private Map<Rotation, Block> blocks = Maps.newHashMap();
+    private Map<BlockUri, Block> blockUriMap = Maps.newHashMap();
     private Block archetypeBlock;
 
-    private Map<BlockUri, Block> blockUriMap = Maps.newHashMap();
+    public FullRotationFamily(BlockFamilyDefinition definition, BlockBuilderHelper helper) {
+        super(definition, helper);
+        super.setCategory(definition.getCategories());
 
-    public FullRotationFamily(BlockUri uri, Iterable<String> categories, Rotation archetypeRotation,
-                              Map<Rotation, Block> blocks) {
-        super(uri, categories);
-        this.blocks = blocks;
+        BlockUri familyUri = new BlockUri(definition.getUrn());
+        super.setBlockUri(familyUri);
 
-        for (Map.Entry<Rotation, Block> rotationBlockEntry : blocks.entrySet()) {
-            Rotation rotation = rotationBlockEntry.getKey();
-            Block block = rotationBlockEntry.getValue();
+        for (Rotation rot : Rotation.values()) {
+            Block block = helper.constructTransformedBlock(definition, rot);
+            BlockUri blockUri = new BlockUri(familyUri, new Name(rot.getYaw().ordinal() + "." + rot.getPitch().ordinal() + "." + rot.getRoll().ordinal()));
             block.setBlockFamily(this);
-            BlockUri blockUri = new BlockUri(uri, new Name(rotation.getYaw().ordinal() + "." + rotation.getPitch().ordinal() + "." + rotation.getRoll().ordinal()));
             block.setUri(blockUri);
+
+            blocks.put(rot, block);
             blockUriMap.put(blockUri, block);
         }
 
-        archetypeBlock = blocks.get(archetypeRotation);
+        archetypeBlock = blocks.get(Rotation.none());
     }
 
     @Override
-    public Block getBlockForPlacement(WorldProvider worldProvider, BlockEntityRegistry blockEntityRegistry, Vector3i location, Side attachmentSide, Side direction) {
+    public Block getBlockForPlacement(Vector3i location, Side attachmentSide, Side direction) {
         // Find first one so that FRONT Side of the original block is same as attachmentSide
         for (Map.Entry<Rotation, Block> rotationBlockEntry : blocks.entrySet()) {
             if (rotationBlockEntry.getKey().rotate(Side.FRONT) == attachmentSide) {
                 return rotationBlockEntry.getValue();
             }
         }
-
         return null;
     }
 
