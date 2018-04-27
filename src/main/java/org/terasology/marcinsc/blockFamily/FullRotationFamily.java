@@ -43,9 +43,8 @@ public class FullRotationFamily extends AbstractBlockFamily implements RotationB
         super.setBlockUri(familyUri);
 
         for (Rotation rot : Rotation.values()) {
-            Block block = helper.constructTransformedBlock(definition, rot);
             BlockUri blockUri = new BlockUri(familyUri, new Name(rot.getYaw().ordinal() + "." + rot.getPitch().ordinal() + "." + rot.getRoll().ordinal()));
-            block.setBlockFamily(this);
+            Block block = helper.constructTransformedBlock(definition, rot, blockUri, this);
             block.setUri(blockUri);
 
             blocks.put(rot, block);
