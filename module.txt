@@ -1,9 +1,11 @@
 {
-    "id" : "MarcinScIncubator",
-    "version" : "0.1.1-SNAPSHOT",
-    "author" : "",
-    "displayName" : "MarcinScIncubator",
-    "description" : "",
-    "dependencies" : [],
-    "isServerSideOnly" : false
+    "id": "MarcinScIncubator",
+    "version": "1.0.0",
+    "author": "The Terasology Foundation",
+    "displayName": "Marcin's Incubator",
+    "description": "???",
+    "dependencies": [],
+    "isServerSideOnly": false,
+    "isAugmentation": true,
+    "isSpecial": true
 }
